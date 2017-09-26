@@ -69,40 +69,55 @@ class Post extends Component {
                 {data.map((comment, idx) => {
                   if (this.props.post.edit === comment.id) {
                     return (
-                      <Col key={idx} className="pre">
-                        <Votes
-                          post={comment}
-                          updateVote={commentVote}
-                          voteScore={comment.voteScore}
-                          id={comment.id}
-                        />
-                        <UpdateComment
-                          cancel={true}
-                          onClick={this.removeCancel.bind(this)}
-                          id={comment.id}
-                        />
-                      </Col>
+                      <div key={idx} className="well">
+                        <article className="media">
+                          <div className="media-left">
+                            <div className="media-content">
+                              <div className="content">
+                                <UpdateComment
+                                  cancel={true}
+                                  onClick={this.removeCancel.bind(this)}
+                                  id={comment.id}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
                     );
                   }
                   if (!comment.delete) {
                     return (
-                      <Col key={idx} className="commentContainer well">
-                        <Votes
-                          post={comment}
-                          updateVote={commentVote}
-                          voteScore={comment.voteScore}
-                          id={comment.id}
-                        />
+                      <div className="well" key={idx}>
+                        <article className="media">
+                          <div className="media-left">
 
-                        {comment.body}
-                        <EditButtons
-                          onClick={this.props.addInput}
-                          deleteComment={this.props.deleteComment}
-                          commentId={comment.id}
-                          formKey="updates"
-                        />
+                            <Votes
+                              post={comment}
+                              updateVote={commentVote}
+                              voteScore={comment.voteScore}
+                              id={comment.id}
+                            />
 
-                      </Col>
+                          </div>
+                          <div className="media-content">
+                            <div className="content">
+                              <p>
+                                <strong>{comment.author}</strong>{" "}
+                                <br />
+                                {console.log(comment)}
+                                {comment.body}
+                              </p>
+                            </div>
+                          </div>
+                          <EditButtons
+                            onClick={this.props.addInput}
+                            deleteComment={this.props.deleteComment}
+                            commentId={comment.id}
+                            formKey="updates"
+                          />
+                        </article>
+                      </div>
                     );
                   }
                 })}

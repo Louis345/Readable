@@ -225,6 +225,12 @@ a:link {
   margin-top: 21px;
   margin-bottom: 10px;
 }
-/*.title:not(:last-child), .subtitle:not(:last-child) {
-  margin-bottom: -3.4rem !important;
-}*/
+.content-positioning {
+  margin-left: 41px;
+}
+.content-title {
+  font-size: 42px;
+}
+.comment-body {
+  margin-left: 22px;
+}

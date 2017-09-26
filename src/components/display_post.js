@@ -44,7 +44,7 @@ const DisplayPost = ({
                     <i className="fa fa-user-circle-o" aria-hidden="true" />
                     <span className="subtitle">{items.author}</span>
                     <i className="fa fa-clock-o" aria-hidden="true" />
-                    {moment(items.timestamp).format("MM/DD/YYYY,h:mm:ss a")}
+                    {moment(items.timestamp).format("MM/DD/YYYY h:mm:ss a")}
                     <br />
                     <Link key={idx} to={`/post/${items.id}`}>
                       <strong className="title is-5">{items.title}</strong>{" "}
