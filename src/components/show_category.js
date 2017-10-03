@@ -10,11 +10,13 @@ class showCategory extends Component {
   }
   renderCategory() {
     const { categories } = this.props.categories;
+    console.log(this.props);
+
     if (categories) {
       return categories.map((category, idx) => {
         return (
           <div className="column" key={idx}>
-            <Link to={`/category/${category.path}`}>
+            <Link to={`${category.path}`}>
 
               <div className="notification" key={idx}>
 
@@ -28,6 +30,7 @@ class showCategory extends Component {
       });
     } else {
       <div>!loading</div>;
+      this.props.fetchCategories();
     }
   }
   render() {
@@ -44,6 +47,7 @@ class showCategory extends Component {
 }
 
 function mapStateToProps(state) {
-  return { categories: state.post };
+  console.log(state);
+  return { ...state, categories: state.post };
 }
 export default connect(mapStateToProps, { fetchCategories })(showCategory);

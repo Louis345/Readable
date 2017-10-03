@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { fetchCategories, createPost, fetchPost } from "../actions";
 import "../App.css";
 class PostAdd extends Component {
@@ -61,7 +62,6 @@ class PostAdd extends Component {
     }
   }
   onSubmit(values) {
-    console.log(this.props.history);
     this.props.createPost(values, () => {
       this.props.history.goBack();
     });
@@ -97,6 +97,7 @@ class PostAdd extends Component {
           <button type="submit" className="btn btn-primary">Submit</button>
           <Link to="/" className="btn btn-danger">Cancel</Link>
         </form>
+        <Footer />
       </div>
     );
   }

@@ -52,9 +52,14 @@ class Category extends Component {
             deletePost={deletePost}
           />
           <div className="buttons">
-            <a className="button is-primary is-outlined">Back</a>
+            <a
+              onClick={() => this.props.history.goBack()}
+              className="button is-primary is-outlined"
+            >
+              Back
+            </a>
           </div>
-
+          <Footer />
         </div>
       );
     } else {

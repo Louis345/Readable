@@ -14,6 +14,7 @@ export const DELETE_COMMENT = "delete_comment";
 export const EDIT_COMMENT = "edit_comment";
 export const POST_CATEGORY = "post_category";
 export const SORT_POSTS = "sort_posts";
+export const ERROR_HANDLER = "error_handler";
 const ROOT_URL = "http://localhost:5001";
 
 const headers = {
@@ -37,13 +38,24 @@ export function getPostCategory(category) {
     payload: request
   };
 }
-export function fetchPost(id) {
+export function handleError(error) {
+  return {
+    type: ERROR_HANDLER,
+    payload: error
+  };
+}
+export function fetchPost(id, callback) {
   const request = axios.get(`${ROOT_URL}/posts/${id}`, headers);
   const commentRequest = axios.get(`${ROOT_URL}/posts/${id}/comments`, headers);
 
-  let data = Promise.all([request, commentRequest]).then(values => {
-    return values;
-  });
+  let data = Promise.all([request, commentRequest])
+    .then(values => {
+      return values;
+    })
+    .catch(error => {
+      callback(error);
+      return error.response.status;
+    });
 
   return {
     type: FETCH_POST,
@@ -106,6 +118,7 @@ export function fetchPosts() {
 }
 export function fetchCategories() {
   const request = axios.get(`${ROOT_URL}/categories`, headers);
+  console.log(request);
   return {
     type: FETCH_CATEGORIES,
     payload: request
@@ -139,8 +152,10 @@ export function createPost(values, callback) {
   };
 }
 
-export function deletePost(id) {
-  const request = axios.delete(`${ROOT_URL}/posts/${id}`, headers);
+export function deletePost(id, callback) {
+  const request = axios.delete(`${ROOT_URL}/posts/${id}`, headers).then(() => {
+    callback();
+  });
 
   return {
     type: DELETE_POST,
@@ -195,7 +210,7 @@ export function editComment(values) {
   };
 }
 
-export function editPost(values) {
+export function editPost(values, callback) {
   //PUT /posts/:id
   const axiosInstance = axios.create({
     baseURL: "http://localhost:5001",
@@ -205,11 +220,15 @@ export function editPost(values) {
     }
   });
 
-  const request = axiosInstance.put(`/posts/${values.id}`, {
-    title: values.title,
-    body: values.body,
-    category: values.category
-  });
+  const request = axiosInstance
+    .put(`/posts/${values.id}`, {
+      title: values.title,
+      body: values.body,
+      category: values.category
+    })
+    .then(() => {
+      callback();
+    });
 
   return {
     type: EDIT_POST,

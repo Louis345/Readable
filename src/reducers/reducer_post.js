@@ -11,7 +11,8 @@ import {
   DELETE_COMMENT,
   EDIT_COMMENT,
   POST_CATEGORY,
-  SORT_POSTS
+  SORT_POSTS,
+  ERROR_HANDLER
 } from "../actions";
 import _ from "lodash";
 export default function(state = {}, action) {
@@ -25,7 +26,13 @@ export default function(state = {}, action) {
 
       return { response: filteredItems };
     case FETCH_CATEGORIES:
+      console.log(state);
+      console.log(action);
       return { ...state, categories: action.payload.data.categories };
+
+    case ERROR_HANDLER: {
+      return { ...state, error: action.payload.response.status };
+    }
     case UPDATE_VOTE:
       const { payload } = action;
       const { voteScore, id } = payload.data;

@@ -9,7 +9,7 @@ const Footer = () => {
           </span>
           <strong>A project </strong>for the React Nanodegree @Udacity.{" "}
           <br />
-          <a className="icon" href="https://github.com/jgthms/bulma">
+          <a className="icon" href="https://github.com/Louis345">
             <i className="fa fa-github" />
           </a>
 

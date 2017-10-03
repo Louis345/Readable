@@ -15,8 +15,13 @@ const Navbar = ({}) => {
             />
           </a>
           <div className="navbar-end">
-            <a className="navbar-item">
+            <a className="navbar-item" href="https://github.com/Louis345">
               <i className="fa fa-github " />
+            </a>
+            <a
+              className="navbar-item"
+              href="https://www.freecodecamp.org/louis345"
+            >
               <i className="fa fa-free-code-camp" aria-hidden="true" />
             </a>
           </div>

@@ -6,7 +6,6 @@ import { Comment } from "../actions";
 class PostComment extends Component {
   handleSubmit() {}
   renderTitleField(field) {
-    console.log(field);
     return (
       <div>
         <label className="label">{field.label}</label>

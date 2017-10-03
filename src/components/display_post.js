@@ -3,7 +3,7 @@ import Votes from "../components/Votes";
 import EditButtons from "../components/EditButtons";
 import updateComment from "../components/updateComments";
 import Comments from "../components/add_comment";
-import { Link } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
 import { Container, Row, Col, Media } from "reactstrap";
 import moment from "moment";
 const DisplayPost = ({
@@ -20,14 +20,15 @@ const DisplayPost = ({
   addInput,
   deleteComment,
   deletePost,
-  commentCount
+  commentCount,
+  navigate
 }) => {
-  {
-    console.log(post);
-  }
   return (
     <div className="container">
       {post.map((items, idx) => {
+        if (Object.keys(items).length === 0) {
+          return <div>Post has been deleted</div>;
+        }
         return (
           <div className="box" key={idx}>
             <article className="media">
@@ -46,8 +47,16 @@ const DisplayPost = ({
                     <i className="fa fa-clock-o" aria-hidden="true" />
                     {moment(items.timestamp).format("MM/DD/YYYY h:mm:ss a")}
                     <br />
-                    <Link key={idx} to={`/post/${items.id}`}>
+                    <Link
+                      className="post-body"
+                      key={idx}
+                      to={`/${items.category}/${items.id}`}
+                    >
                       <strong className="title is-5">{items.title}</strong>{" "}
+                      <br />
+                      <strong className="post-body subtitle is-4">
+                        {items.body}
+                      </strong>{" "}
                     </Link>
 
                     <br />
@@ -78,7 +87,7 @@ const DisplayPost = ({
                 <div className="modify-buttons">
                   <div className="button is-primary is-outlined">
                     <span>
-                      <Link to={`/Edit/${items.id}`}>
+                      <Link to={`/Edit/EditPost/${items.id}`}>
                         Edit
                       </Link>
                     </span>
@@ -87,7 +96,12 @@ const DisplayPost = ({
                     </span>
                   </div>
                   <div className="button is-danger is-outlined">
-                    <span onClick={() => deletePost(items.id)}>
+                    <span
+                      onClick={() =>
+                        deletePost(items.id, () => {
+                          navigate && navigate();
+                        })}
+                    >
                       Delete
                     </span>
                     <span className="icon is-small">

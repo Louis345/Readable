@@ -71,8 +71,9 @@ class Edit extends Component {
 
   onSubmit(values) {
     // this.props.createPost(values);
-
-    this.props.editPost(values);
+    this.props.editPost(values, () => {
+      this.props.history.goBack();
+    });
   }
   render() {
     const { handleSubmit } = this.props;
@@ -104,10 +105,7 @@ class Edit extends Component {
             label={"Message"}
           />
           <button type="submit" className="button is-primary">Submit</button>
-          <button
-            onClick={() => this.props.history.goBack()}
-            className="button is-danger"
-          >
+          <button className="button is-danger">
             Cancel
           </button>
         </form>

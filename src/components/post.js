@@ -9,7 +9,8 @@ import {
   addInput,
   removeInput,
   editComment,
-  deleteComment
+  deleteComment,
+  handleError
 } from "../actions";
 import { Container, Row, Col } from "reactstrap";
 import Votes from "../components/Votes";
@@ -21,24 +22,31 @@ import { Field, reduxForm, initialize } from "redux-form";
 import { bindActionCreator } from "redux";
 import DisplayPost from "../components/display_post";
 class Post extends Component {
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
     const { id } = this.props.match.params;
+    this.props.fetchPost(id, error => {
+      this.props.handleError(error);
+    });
+  }
 
-    this.props.fetchPost(id);
-  }
-  renderInput() {
-    return (
-      <div>
-        <input />
-      </div>
-    );
-  }
   removeCancel(event) {
     const { edit } = this.props.post;
     this.props.removeInput();
   }
-
+  navigate = location => {
+    this.props.history.goBack();
+  };
   renderPost() {
+    if (this.props.post.error) {
+      return (
+        <div>
+          Error{" "}
+        </div>
+      );
+    }
     if (this.props.post.action) {
       const { post } = this.props.post.action.payload[0].data;
       const { newComment } = this.props.post;
@@ -52,9 +60,14 @@ class Post extends Component {
       } = this.props.post.action.payload[0].data;
 
       const { data } = this.props.post.action.payload[1];
-
+      const commentLength = data.length;
       const { id } = this.props.post.action.payload[0].data;
-
+      let filteredItems = this.props.post.action.payload[0].data === false
+        ? this.props.post.action.payload[0].data
+        : null;
+      if (Object.keys(this.props.post.action.payload[0].data).length === 0) {
+        return <div className="title notification">Post has been deleted</div>;
+      }
       return (
         <div className="container">
           <div className="columns">
@@ -64,8 +77,12 @@ class Post extends Component {
                   post={[this.props.post.action.payload[0].data]}
                   updateVote={updateVote}
                   deletePost={deletePost}
+                  navigate={this.navigate}
                 />
-                <span className="title is-4">Comments</span>
+                <span className="title is-4">
+                  {" "} {`${commentLength} Comments`}
+                </span>
+
                 {data.map((comment, idx) => {
                   if (this.props.post.edit === comment.id) {
                     return (
@@ -78,6 +95,7 @@ class Post extends Component {
                                   cancel={true}
                                   onClick={this.removeCancel.bind(this)}
                                   id={comment.id}
+                                  comment={comment}
                                 />
                               </div>
                             </div>
@@ -105,7 +123,6 @@ class Post extends Component {
                               <p>
                                 <strong>{comment.author}</strong>{" "}
                                 <br />
-                                {console.log(comment)}
                                 {comment.body}
                               </p>
                             </div>
@@ -181,5 +198,6 @@ export default connect(mapStateToProps, {
   addInput,
   removeInput,
   editComment,
-  deleteComment
+  deleteComment,
+  handleError
 })(Post);

@@ -12,6 +12,18 @@ class UpdateComment extends Component {
       </div>
     );
   }
+  componentDidMount() {
+    this.handleInitialize();
+  }
+  handleInitialize() {
+    console.log(this.props.comment);
+    const { author, body } = this.props.comment;
+    const initData = {
+      username: author,
+      comment: body
+    };
+    this.props.initialize(initData);
+  }
   onSubmit(values) {
     const { id, editComment } = this.props;
     values.id = id;

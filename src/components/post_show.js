@@ -53,12 +53,13 @@ class PostsShow extends Component {
           </h3>
           <div className="container">
             {this.renderPosts()}
+            <Footer />
           </div>
           <div className="submit">
             <a
               className="button is-primary"
               onClick={() => {
-                this.props.history.push("/posts/create_post");
+                this.props.history.push("/posts/PostAdd/post_add");
               }}
             >
               <span className="icon is-small">
