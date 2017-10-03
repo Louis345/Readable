@@ -14,6 +14,6 @@
 <li>if you download this as a zip, you will have to extract the files.
 you will also need the server where the data will be stored. clone/download this repo too: https://github.com/udacity/reactnd-project-readable-starter</li>
 <li>in your command prompt/terminal, change directory to the server root(where you cloned/extracted the repo) and run: npm install -> then run: node server</li>
-<li>in your command prompt/terminal, change directory to the project root(where you cloned/extracted the repo).<li>
+<li>in your command prompt/terminal, change directory to the project root(where you cloned/extracted the repo).</li>
   <li>to start the react app, run this command: npm start</li>
   <li>This will start the app in your default browser at: localhost:3000</li>
