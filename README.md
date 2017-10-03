@@ -8,11 +8,12 @@
 <h2>Install Instructions</h2>
 
 <h3>Here is how you can load the application onto your local machine:</h3>
-
-First, install node.js if you do not have it yet. It comes with npm(node package manage). Make sure that you install node with the PATH variable so you can run node anywhere in your command prompt/terminal.
-The environment is now ready. You can either clone this repo or download it as a zip.
-if you download this as a zip, you will have to extract the files.
-you will also need the server where the data will be stored. clone/download this repo too: https://github.com/udacity/reactnd-project-readable-starter
-in your command prompt/terminal, change directory to the server root(where you cloned/extracted the repo) and run: npm install -> then run: node server
-in your command prompt/terminal, change directory to the project root(where you cloned/extracted the repo). to start the react app, run this command: npm start
-This will start the app in your default browser at: localhost:3000
+<ol>
+<li>First, install node.js if you do not have it yet. It comes with npm(node package manage). Make sure that you install node with the PATH variable so you can run node anywhere in your command prompt/terminal.</li>
+  <li>The environment is now ready. You can either clone this repo or download it as a zip.</li>
+<li>if you download this as a zip, you will have to extract the files.
+you will also need the server where the data will be stored. clone/download this repo too: https://github.com/udacity/reactnd-project-readable-starter</li>
+<li>in your command prompt/terminal, change directory to the server root(where you cloned/extracted the repo) and run: npm install -> then run: node server</li>
+<li>in your command prompt/terminal, change directory to the project root(where you cloned/extracted the repo).<li>
+  <li>to start the react app, run this command: npm start</li>
+  <li>This will start the app in your default browser at: localhost:3000</li>
