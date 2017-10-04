@@ -1,12 +1,3 @@
-footer {
-  /* Like the header, the footer will have a static height - it shouldn't grow or shrink.  */
-  /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
 .categories {
   display: flex;
   justify-content: space-around;

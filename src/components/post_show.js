@@ -53,7 +53,7 @@ class PostsShow extends Component {
           </h3>
           <div className="container">
             {this.renderPosts()}
-            <Footer />
+
           </div>
           <div className="submit">
             <a
@@ -69,7 +69,7 @@ class PostsShow extends Component {
             </a>
           </div>
         </div>
-
+        <Footer />
       </div>
     );
   }
